@@ -5,6 +5,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+import { LazyPages1, LazyPages2, LazyPages3 } from "../01-lazyload/pages";
 
 export const Navigation = () => {
   return (
@@ -15,39 +16,39 @@ export const Navigation = () => {
           <ul>
             <li>
               <NavLink
-                to={"/"}
+                to={"/lazy1"}
                 className={({ isActive }) => (isActive ? "nav-active" : "")}
               >
-                Home
+                Lazy 1
               </NavLink>
             </li>
           </ul>
           <ul>
             <li>
               <NavLink
-                to={"/about"}
+                to={"/lazy2"}
                 className={({ isActive }) => (isActive ? "nav-active" : "")}
               >
-                About
+                Lazy 2
               </NavLink>
             </li>
           </ul>
           <ul>
             <li>
               <NavLink
-                to={"/users"}
+                to={"/lazy3"}
                 className={({ isActive }) => (isActive ? "nav-active" : "")}
               >
-                Users
+                Lazy 3
               </NavLink>
             </li>
           </ul>
         </nav>
         <Routes>
-          <Route path="/" element={<h1>Home Page</h1>} />
-          <Route path="about" element={<h1>About Page</h1>} />
-          <Route path="users" element={<h1>Users Page</h1>} />
-          <Route path="/*" element={<Navigate to={"/"} replace />} />
+          <Route path="lazy1" element={<LazyPages1 />} />
+          <Route path="lazy2" element={<LazyPages2 />} />
+          <Route path="lazy3" element={<LazyPages3 />} />
+          <Route path="/*" element={<Navigate to={"/lazy1"} replace />} />
         </Routes>
       </div>
     </BrowserRouter>
