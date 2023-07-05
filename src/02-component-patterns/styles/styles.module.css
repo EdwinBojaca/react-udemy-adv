@@ -58,3 +58,10 @@
 .buttonAdd:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.disabled {
+  /* !important sobre escribe cualquier otra  */
+  border-color: grey !important;
+  border-left: 1px solid white;
+  color: grey !important;
+}

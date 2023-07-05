@@ -5,31 +5,27 @@ import {
   ProductTitle,
 } from "../components";
 import { product } from "../data/products";
-import { useShoppingCart } from "../hooks/useShoppingCart";
 
 import "../styles/custom-styles.css";
 
+const products = product[0];
+
 export const ShoppingPage = () => {
-  const { onProductCountChange, shoppingCart } = useShoppingCart();
   return (
     <div>
       <h1>Shopping Store</h1>
       <hr />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
+      <ProductCard
+        key={products.id}
+        product={products}
+        className="bg-dark text-whvite"
+        initialValues={{
+          count: 6,
+          maxCount: 10,
         }}
       >
-        {product.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            className="bg-dark text-white"
-            onChange={(evento) => onProductCountChange(evento)}
-            value={shoppingCart[product.id]?.count || 0}
-          >
+        {({ reset, count, maxCount, increaseBy, isMaxCountReached }) => (
+          <>
             <ProductImage
               className="custom-image"
               style={{
@@ -38,41 +34,19 @@ export const ShoppingPage = () => {
             />
             <ProductTitle className="text-bold" />
             <ProductButtons className="custom-buttons" />
-          </ProductCard>
-        ))}
-      </div>
+            <button onClick={reset}>Reset</button>
+            <button onClick={() => increaseBy(-2)}>-2</button>
+            {/* si no se ha llegado al valor maximo entonces mostrar el jsx o button */}
+            {!isMaxCountReached && (
+              <button onClick={() => increaseBy(2)}>+2</button>
+            )}
 
-      <div className="shopping-cart">
-        {/* Propio de javaScript y me permite tener las entradas de un objeto */}
-        {Object.entries(shoppingCart).map(([key, product]) => (
-          <ProductCard
-            key={key}
-            product={product}
-            className="bg-dark text-white"
-            style={{ width: "100px" }}
-            onChange={onProductCountChange}
-            value={product.count}
-          >
-            <ProductImage
-              className="custom-image"
-              style={{
-                boxShadow: "10px 10px 10px rgba(0,0,0,0.2)",
-              }}
-            />
-
-            <ProductButtons
-              className="custom-buttons"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            />
-          </ProductCard>
-        ))}
-      </div>
-      <div>
-        <code>{JSON.stringify(shoppingCart, null, 5)}</code>
-      </div>
+            <span>
+              {count} - {maxCount}
+            </span>
+          </>
+        )}
+      </ProductCard>
     </div>
   );
 };
