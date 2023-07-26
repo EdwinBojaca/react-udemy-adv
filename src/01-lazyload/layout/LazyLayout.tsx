@@ -1,7 +1,7 @@
 import { NavLink, Navigate, Route, Routes } from "react-router-dom";
 import { LazyPages1, LazyPages2, LazyPages3 } from "../pages";
 
-export const LazyLayout = () => {
+const LazyLayout = () => {
   return (
     <div>
       <h1>LazyLayout Page</h1>
@@ -29,4 +29,5 @@ export const LazyLayout = () => {
   );
 };
 
+// regla de oro
 export default LazyLayout;

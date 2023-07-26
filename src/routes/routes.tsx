@@ -19,6 +19,7 @@ const LazyLayout = lazy(
     )
 );
 
+// cambia nombre al chunk
 export const routes: Route[] = [
   {
     to: "/lazyload/*",
